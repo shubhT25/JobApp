@@ -1,8 +1,9 @@
 package com.project.jobapp.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="Jobs")
@@ -15,17 +16,23 @@ public class Job {
     private float minSalary;
     private String location;
 
+    @ManyToOne
+    @JoinColumn(name = "COMPANY_ID", nullable = false)
+    @JsonBackReference
+    private Company company;
+
     public Job() {
 
     }
 
-    public Job(long id, String title, String description, String location, float maxSalary, float minSalary) {
+    public Job(long id, String title, String description, String location, float maxSalary, float minSalary, Company company) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.location = location;
         this.maxSalary = maxSalary;
         this.minSalary = minSalary;
+        this.company = company;
     }
 
     public long getId() {
@@ -73,5 +80,13 @@ public class Job {
 
     public void setMinSalary(float minSalary) {
         this.minSalary = minSalary;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

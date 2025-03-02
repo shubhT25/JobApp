@@ -39,6 +39,7 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @DeleteMapping("/job/{id}")
     public ResponseEntity<String> deleteJobById(@PathVariable Long id) {
         String message = jobService.deleteJobById(id);
         if(Objects.equals(message, "success")){
@@ -47,6 +48,7 @@ public class JobController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    @PutMapping("/job/{id}")
     public ResponseEntity<String> updateJobById(@PathVariable Long id, @RequestBody Job updateJob) {
         String message = jobService.updateJobById(id, updateJob);
         if(Objects.equals(message, "success")){
